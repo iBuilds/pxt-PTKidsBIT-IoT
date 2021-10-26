@@ -1,4 +1,4 @@
-# PTKidsBIT block package for PT-BOT KidsBIT kit
+# PTKidsBIT block package for PT-BOT KidsBIT: IoT
 
 powered by micro:bit
 
