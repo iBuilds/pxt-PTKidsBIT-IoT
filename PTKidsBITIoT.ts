@@ -165,8 +165,523 @@ enum Turn_Line {
     Right
 }
 
-//% color="#2ECC71" icon="\u2B9A"
-namespace PTKidsBIT {
+enum Virtual_Pin {
+    //% block="V0"
+    V0 = 0,
+    //% block="V1"
+    V1 = 1,
+    //% block="V2"
+    V2 = 2,
+    //% block="V3"
+    V3 = 3,
+    //% block="V4"
+    V4 = 4,
+    //% block="V5"
+    V5 = 5,
+    //% block="V6"
+    V6 = 6,
+    //% block="V7"
+    V7 = 7,
+    //% block="V8"
+    V8 = 8,
+    //% block="V9"
+    V9 = 9,
+    //% block="V10"
+    V10 = 10,
+    //% block="V11"
+    V11 = 11,
+    //% block="V12"
+    V12 = 12,
+    //% block="V13"
+    V13 = 13,
+    //% block="V14"
+    V14 = 14,
+    //% block="V15"
+    V15 = 15,
+    //% block="V16"
+    V16 = 16,
+    //% block="V17"
+    V17 = 17,
+    //% block="V18"
+    V18 = 18,
+    //% block="V19"
+    V19 = 19,
+    //% block="V20"
+    V20 = 20,
+    //% block="V21"
+    V21 = 21,
+    //% block="V22"
+    V22 = 22,
+    //% block="V23"
+    V23 = 23,
+    //% block="V24"
+    V24 = 24,
+    //% block="V25"
+    V25 = 25,
+    //% block="V26"
+    V26 = 26,
+    //% block="V27"
+    V27 = 27,
+    //% block="V28"
+    V28 = 28,
+    //% block="V29"
+    V29 = 29,
+    //% block="V30"
+    V30 = 30,
+    //% block="V31"
+    V31 = 31,
+    //% block="V32"
+    V32 = 32,
+    //% block="V33"
+    V33 = 33,
+    //% block="V34"
+    V34 = 34,
+    //% block="V35"
+    V35 = 35,
+    //% block="V36"
+    V36 = 36,
+    //% block="V37"
+    V37 = 37,
+    //% block="V38"
+    V38 = 38,
+    //% block="V39"
+    V39 = 39,
+    //% block="V40"
+    V40 = 40,
+    //% block="V41"
+    V41 = 41,
+    //% block="V42"
+    V42 = 42,
+    //% block="V43"
+    V43 = 43,
+    //% block="V44"
+    V44 = 44,
+    //% block="V45"
+    V45 = 45,
+    //% block="V46"
+    V46 = 46,
+    //% block="V47"
+    V47 = 47,
+    //% block="V48"
+    V48 = 48,
+    //% block="V49"
+    V49 = 49,
+    //% block="V50"
+    V50 = 50,
+    //% block="V51"
+    V51 = 51,
+    //% block="V52"
+    V52 = 52,
+    //% block="V53"
+    V53 = 53,
+    //% block="V54"
+    V54 = 54,
+    //% block="V55"
+    V55 = 55,
+    //% block="V56"
+    V56 = 56,
+    //% block="V57"
+    V57 = 57,
+    //% block="V58"
+    V58 = 58,
+    //% block="V59"
+    V59 = 59,
+    //% block="V60"
+    V60 = 60,
+    //% block="V61"
+    V61 = 61,
+    //% block="V62"
+    V62 = 62,
+    //% block="V63"
+    V63 = 63,
+    //% block="V64"
+    V64 = 64,
+    //% block="V65"
+    V65 = 65,
+    //% block="V66"
+    V66 = 66,
+    //% block="V67"
+    V67 = 67,
+    //% block="V68"
+    V68 = 68,
+    //% block="V69"
+    V69 = 69,
+    //% block="V70"
+    V70 = 70,
+    //% block="V71"
+    V71 = 71,
+    //% block="V72"
+    V72 = 72,
+    //% block="V73"
+    V73 = 73,
+    //% block="V74"
+    V74 = 74,
+    //% block="V75"
+    V75 = 75,
+    //% block="V76"
+    V76 = 76,
+    //% block="V77"
+    V77 = 77,
+    //% block="V78"
+    V78 = 78,
+    //% block="V79"
+    V79 = 79,
+    //% block="V80"
+    V80 = 80,
+    //% block="V81"
+    V81 = 81,
+    //% block="V82"
+    V82 = 82,
+    //% block="V83"
+    V83 = 83,
+    //% block="V84"
+    V84 = 84,
+    //% block="V85"
+    V85 = 85,
+    //% block="V86"
+    V86 = 86,
+    //% block="V87"
+    V87 = 87,
+    //% block="V88"
+    V88 = 88,
+    //% block="V89"
+    V89 = 89,
+    //% block="V90"
+    V90 = 90,
+    //% block="V91"
+    V91 = 91,
+    //% block="V92"
+    V92 = 92,
+    //% block="V93"
+    V93 = 93,
+    //% block="V94"
+    V94 = 94,
+    //% block="V95"
+    V95 = 95,
+    //% block="V96"
+    V96 = 96,
+    //% block="V97"
+    V97 = 97,
+    //% block="V98"
+    V98 = 98,
+    //% block="V99"
+    V99 = 99,
+    //% block="V100"
+    V100 = 100,
+    //% block="V101"
+    V101 = 101,
+    //% block="V102"
+    V102 = 102,
+    //% block="V103"
+    V103 = 103,
+    //% block="V104"
+    V104 = 104,
+    //% block="V105"
+    V105 = 105,
+    //% block="V106"
+    V106 = 106,
+    //% block="V107"
+    V107 = 107,
+    //% block="V108"
+    V108 = 108,
+    //% block="V109"
+    V109 = 109,
+    //% block="V110"
+    V110 = 110,
+    //% block="V111"
+    V111 = 111,
+    //% block="V112"
+    V112 = 112,
+    //% block="V113"
+    V113 = 113,
+    //% block="V114"
+    V114 = 114,
+    //% block="V115"
+    V115 = 115,
+    //% block="V116"
+    V116 = 116,
+    //% block="V117"
+    V117 = 117,
+    //% block="V118"
+    V118 = 118,
+    //% block="V119"
+    V119 = 119,
+    //% block="V120"
+    V120 = 120,
+    //% block="V121"
+    V121 = 121,
+    //% block="V122"
+    V122 = 122,
+    //% block="V123"
+    V123 = 123,
+    //% block="V124"
+    V124 = 124,
+    //% block="V125"
+    V125 = 125,
+    //% block="V126"
+    V126 = 126,
+    //% block="V127"
+    V127 = 127,
+    //% block="V128"
+    V128 = 128,
+    //% block="V129"
+    V129 = 129,
+    //% block="V130"
+    V130 = 130,
+    //% block="V131"
+    V131 = 131,
+    //% block="V132"
+    V132 = 132,
+    //% block="V133"
+    V133 = 133,
+    //% block="V134"
+    V134 = 134,
+    //% block="V135"
+    V135 = 135,
+    //% block="V136"
+    V136 = 136,
+    //% block="V137"
+    V137 = 137,
+    //% block="V138"
+    V138 = 138,
+    //% block="V139"
+    V139 = 139,
+    //% block="V140"
+    V140 = 140,
+    //% block="V141"
+    V141 = 141,
+    //% block="V142"
+    V142 = 142,
+    //% block="V143"
+    V143 = 143,
+    //% block="V144"
+    V144 = 144,
+    //% block="V145"
+    V145 = 145,
+    //% block="V146"
+    V146 = 146,
+    //% block="V147"
+    V147 = 147,
+    //% block="V148"
+    V148 = 148,
+    //% block="V149"
+    V149 = 149,
+    //% block="V150"
+    V150 = 150,
+    //% block="V151"
+    V151 = 151,
+    //% block="V152"
+    V152 = 152,
+    //% block="V153"
+    V153 = 153,
+    //% block="V154"
+    V154 = 154,
+    //% block="V155"
+    V155 = 155,
+    //% block="V156"
+    V156 = 156,
+    //% block="V157"
+    V157 = 157,
+    //% block="V158"
+    V158 = 158,
+    //% block="V159"
+    V159 = 159,
+    //% bl1ock="V160"
+    V160 = 160,
+    //% bl1ock="V161"
+    V161 = 161,
+    //% block="V162"
+    V162 = 162,
+    //% block="V163"
+    V163 = 163,
+    //% block="V164"
+    V164 = 164,
+    //% block="V165"
+    V165 = 165,
+    //% block="V166"
+    V166 = 166,
+    //% block="V167"
+    V167 = 167,
+    //% block="V168"
+    V168 = 168,
+    //% block="V169"
+    V169 = 169,
+    //% block="V170"
+    V170 = 170,
+    //% block="V171"
+    V171 = 171,
+    //% block="V172"
+    V172 = 172,
+    //% block="V173"
+    V173 = 173,
+    //% block="V174"
+    V174 = 174,
+    //% block="V175"
+    V175 = 175,
+    //% block="V176"
+    V176 = 176,
+    //% block="V177"
+    V177 = 177,
+    //% block="V178"
+    V178 = 178,
+    //% block="V179"
+    V179 = 179,
+    //% block="V180"
+    V180 = 180,
+    //% block="V181"
+    V181 = 181,
+    //% block="V182"
+    V182 = 182,
+    //% block="V183"
+    V183 = 183,
+    //% block="V184"
+    V184 = 184,
+    //% block="V185"
+    V185 = 185,
+    //% block="V186"
+    V186 = 186,
+    //% block="V187"
+    V187 = 187,
+    //% block="V188"
+    V188 = 188,
+    //% block="V189"
+    V189 = 189,
+    //% block="V190"
+    V190 = 190,
+    //% block="V191"
+    V191 = 191,
+    //% block="V192"
+    V192 = 192,
+    //% block="V193"
+    V193 = 193,
+    //% block="V194"
+    V194 = 194,
+    //% block="V195"
+    V195 = 195,
+    //% block="V196"
+    V196 = 196,
+    //% block="V197"
+    V197 = 197,
+    //% block="V198"
+    V198 = 198,
+    //% block="V199"
+    V199 = 199,
+    //% block="V200"
+    V200 = 200,
+    //% block="V201"
+    V201 = 201,
+    //% block="V202"
+    V202 = 202,
+    //% block="V203"
+    V203 = 203,
+    //% block="V204"
+    V204 = 204,
+    //% block="V205"
+    V205 = 205,
+    //% block="V206"
+    V206 = 206,
+    //% block="V207"
+    V207 = 207,
+    //% block="V208"
+    V208 = 208,
+    //% block="V209"
+    V209 = 209,
+    //% block="V210"
+    V210 = 210,
+    //% block="V211"
+    V211 = 211,
+    //% block="V212"
+    V212 = 212,
+    //% block="V213"
+    V213 = 213,
+    //% block="V214"
+    V214 = 214,
+    //% block="V215"
+    V215 = 215,
+    //% block="V216"
+    V216 = 216,
+    //% block="V217"
+    V217 = 217,
+    //% block="V218"
+    V218 = 218,
+    //% block="V219"
+    V219 = 219,
+    //% block="V220"
+    V220 = 220,
+    //% block="V221"
+    V221 = 221,
+    //% block="V222"
+    V222 = 222,
+    //% block="V223"
+    V223 = 223,
+    //% block="V224"
+    V224 = 224,
+    //% block="V225"
+    V225 = 225,
+    //% block="V226"
+    V226 = 226,
+    //% block="V227"
+    V227 = 227,
+    //% block="V228"
+    V228 = 228,
+    //% block="V229"
+    V229 = 229,
+    //% block="V230"
+    V230 = 230,
+    //% block="V231"
+    V231 = 231,
+    //% block="V232"
+    V232 = 232,
+    //% block="V233"
+    V233 = 233,
+    //% block="V234"
+    V234 = 234,
+    //% block="V235"
+    V235 = 235,
+    //% block="V236"
+    V236 = 236,
+    //% block="V237"
+    V237 = 237,
+    //% block="V238"
+    V238 = 238,
+    //% block="V239"
+    V239 = 239,
+    //% block="V240"
+    V240 = 240,
+    //% block="V241"
+    V241 = 241,
+    //% block="V242"
+    V242 = 242,
+    //% block="V243"
+    V243 = 243,
+    //% block="V244"
+    V244 = 244,
+    //% block="V245"
+    V245 = 245,
+    //% block="V246"
+    V246 = 246,
+    //% block="V247"
+    V247 = 247,
+    //% block="V248"
+    V248 = 248,
+    //% block="V249"
+    V249 = 249,
+    //% block="V250"
+    V250 = 250,
+    //% block="V251"
+    V251 = 251,
+    //% block="V252"
+    V252 = 252,
+    //% block="V253"
+    V253 = 253,
+    //% block="V254"
+    V254 = 254,
+    //% block="V255"
+    V255 = 255
+}
+
+//% color="#2ACAEA" icon="\u2B9A"
+namespace PTKidsBITIoT {
     function initPCA(): void {
         let i2cData = pins.createBuffer(2)
         initI2C = true
@@ -470,6 +985,244 @@ namespace PTKidsBIT {
                 while (pins.digitalReadPin(DigitalPin.P12) == 1);
             }
         }
+    }
+
+    //% group="WiFi"
+    /**
+     * Disconnect WiFi
+     */
+    //% block="disconnectWiFi"
+    export function disconnectWiFi() {
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("WIFI_DISCONNECT")
+        while (!(serial.readLine().includes("DISCONNECTED")));
+        serial.redirectToUSB()
+    }
+
+    //% group="WiFi"
+    /**
+     * Check WiFi status
+     */
+    //% block="statusWiFi"
+    export function statusWiFi() {
+        let inputString = ""
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("WIFI_STATUS")
+        while (inputString.length == 0) {
+            inputString = serial.readLine()
+        }
+        serial.redirectToUSB()
+        return inputString
+    }
+
+    //% group="WiFi"
+    /**
+     * Connect WiFi
+     */
+    //% block="connectWiFi %SSID|Password %Password"
+    export function connectWiFi(ssid: string, password: string): void {
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("WIFI_CONNECT," + ssid + "," + password)
+        while (!(serial.readLine().includes("WIFI_CONNECTED")));
+        basic.showIcon(IconNames.Yes)
+        basic.pause(1000)
+        basic.clearScreen()
+        serial.redirectToUSB()
+    }
+
+    //% group="Blynk"
+    /**
+     * Write value to blynk
+     */
+    //% block="BlynkWrite $pin|Value %value"
+    export function BlynkWrite(pin: Virtual_Pin, value: string): void {
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("BLYNK_WRITE,V" + pin + "," + value)
+        while (!(serial.readLine().includes("BLYNK_WRITE_SUCCESS")));
+        serial.redirectToUSB()
+    }
+
+    //% group="Blynk"
+    /**
+     * Read value from blynk
+     */
+    //% block="BlynkRead $pin"
+    export function BlynkRead(pin: Virtual_Pin) {
+        let inputString = ""
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("BLYNK_READ,V" + pin)
+        while (inputString.length == 0) {
+            inputString = serial.readLine()
+        }
+        inputString = inputString.split("\"")[1]
+        serial.redirectToUSB()
+        return inputString
+    }
+
+    //% group="Blynk"
+    /**
+     * Set token blynk
+     */
+    //% block="SETBlynkToken %token"
+    export function SETBlynkToken(token: string): void {
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("BLYNK_SET_TOKEN," + token)
+        while (!(serial.readLine().includes("BLYNK_SET_TOKEN_SUCCESS")));
+        serial.redirectToUSB()
+    }
+
+    //% group="Line Notify"
+    /**
+     * Send image to line notify
+     */
+    //% block="LineNotifyImage %url"
+    export function LineNotifyImage(url: string): void {
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("LINE_WRITE_PICTURE," + url)
+        while (!(serial.readLine().includes("LINE_NOTIFY_SUCCESS")));
+        serial.redirectToUSB()
+    }
+
+    //% group="Line Notify"
+    /**
+     * Send string to line notify
+     */
+    //% block="LineNotifyString %message"
+    export function LineNotifyString(message: string): void {
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("LINE_WRITE_STRING," + message)
+        while (!(serial.readLine().includes("LINE_NOTIFY_SUCCESS")));
+        serial.redirectToUSB()
+    }
+
+    //% group="Line Notify"
+    /**
+     * Set token line notify
+     */
+    //% block="SETLineToken %token"
+    export function SETLineToken(token: string): void {
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("LINE_SET_TOKEN," + token)
+        while (!(serial.readLine().includes("LINE_SET_TOKEN_SUCCESS")));
+        serial.redirectToUSB()
+    }
+
+    //% group="HTTP Method"
+    /**
+     * HTTP get method
+     */
+    //% block="HTTP GET %url|Port %port"
+    //% port.defl=443
+    export function HTTPGet(url: string, port: number) {
+        let inputString = ""
+        serial.redirect(
+            SerialPin.P1,
+            SerialPin.P2,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("GET," + url + "," + port)
+        while (1) {
+            inputString += serial.readString()
+            if (inputString.includes("HTTP_GET_SUCCESS")) {
+                break
+            }
+        }
+        inputString = inputString.substr(0, inputString.length - 19)
+        serial.redirectToUSB()
+        return inputString
+    }
+
+    //% group="JSON"
+    /**
+     * Get data from json string
+     */
+    //% block="GETFromJson %json|Key %find"
+    export function GETFromJson(json: string, find: string) {
+        let data = json
+        let count = 0
+        let text_output: string[] = []
+        let text_split: string[] = []
+        let substring = ""
+        let index = 0
+        while (true) {
+            index = data.indexOf("\"" + find + "\":")
+            if (index != -1) {
+                substring = data.substr(index + find.length + 3, data.length - index)
+                data = substring
+                text_split = substring.split(",")
+                text_output[count] = text_split[0]
+                count += 1
+            } else {
+                break;
+            }
+        }
+        return text_output
     }
 
     //% group="Line Follower"
