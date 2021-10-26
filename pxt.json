@@ -1,5 +1,5 @@
 {
-    "name": "pxt-PTKidsBIT",
+    "name": "pxt-PTKidsBIT-IoT",
     "version": "2.0.8",
     "description": "",
     "dependencies": {
@@ -9,7 +9,7 @@
     },
     "files": [
         "README.md",
-        "PTKidsBIT.ts"
+        "PTKidsBITIoT.ts"
     ],
     "testFiles": [
         "test.ts"
