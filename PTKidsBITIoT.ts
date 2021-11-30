@@ -994,8 +994,8 @@ namespace PTKidsBITIoT {
     //% block="disconnectWiFi"
     export function disconnectWiFi() {
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1014,8 +1014,8 @@ namespace PTKidsBITIoT {
     export function statusWiFi() {
         let inputString = ""
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1036,8 +1036,8 @@ namespace PTKidsBITIoT {
     //% block="connectWiFi %SSID|Password %Password"
     export function connectWiFi(ssid: string, password: string): void {
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1058,8 +1058,8 @@ namespace PTKidsBITIoT {
     //% block="BlynkWrite $pin|Value %value"
     export function BlynkWrite(pin: Virtual_Pin, value: string): void {
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1078,8 +1078,8 @@ namespace PTKidsBITIoT {
     export function BlynkRead(pin: Virtual_Pin) {
         let inputString = ""
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1101,8 +1101,8 @@ namespace PTKidsBITIoT {
     //% block="SETBlynkToken %token"
     export function SETBlynkToken(token: string): void {
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1120,8 +1120,8 @@ namespace PTKidsBITIoT {
     //% block="LineNotifyImage %url"
     export function LineNotifyImage(url: string): void {
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1139,8 +1139,8 @@ namespace PTKidsBITIoT {
     //% block="LineNotifyString %message"
     export function LineNotifyString(message: string): void {
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1158,8 +1158,8 @@ namespace PTKidsBITIoT {
     //% block="SETLineToken %token"
     export function SETLineToken(token: string): void {
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1179,8 +1179,8 @@ namespace PTKidsBITIoT {
     export function HTTPGet(url: string, port: number) {
         let inputString = ""
         serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
+            SerialPin.P8,
+            SerialPin.P12,
             BaudRate.BaudRate115200
         )
         serial.setWriteLinePadding(0)
@@ -1763,5 +1763,51 @@ namespace PTKidsBITIoT {
         }
         music.playTone(784, music.beat(BeatFraction.Quarter))
         music.playTone(587, music.beat(BeatFraction.Quarter))
+    }
+
+    //% group="Tools"
+    /**
+     * Update Firmware
+     */
+    //% block="updateFirmware"
+    export function updateFirmware() {
+        let inputString = ""
+        serial.redirect(
+            SerialPin.P8,
+            SerialPin.P12,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("UPDATE_FIRMWARE")
+        while (inputString.length == 0) {
+            inputString = serial.readLine()
+        }
+        while (1) {
+            if (inputString.includes("LATEST_FIRMWARE")) {
+                basic.showIcon(IconNames.Happy)
+                basic.pause(1000)
+                basic.clearScreen()
+                serial.redirectToUSB()
+                serial.writeLine("Latest Firmware")
+                break
+            }
+            else if (inputString.includes("NEW_FIRMWARE")) {
+                while (!(serial.readLine().includes("START_IOT_MODULE")));
+                basic.showIcon(IconNames.Happy)
+                basic.pause(1000)
+                basic.clearScreen()
+                serial.redirectToUSB()
+                serial.writeLine("Update Firmware Success")
+                break
+            }
+            else {
+                basic.showIcon(IconNames.Sad)
+                basic.pause(1000)
+                basic.clearScreen()
+                break
+            }
+        }
     }
 }
