@@ -31,8 +31,6 @@ let previous_error = 0
 let PD_Value = 0
 let left_motor_speed = 0
 let right_motor_speed = 0
-let last_degree_P8 = 0;
-let last_degree_P12 = 0;
 
 enum Motor_Write {
     //% block="1"
@@ -56,17 +54,6 @@ enum _Spin {
 }
 
 enum Servo_Write {
-    //% block="P8"
-    P8,
-    //% block="P12"
-    P12
-}
-
-enum Servo_Write2 {
-    //% block="P8"
-    P8,
-    //% block="P12"
-    P12,
     //% block="S0"
     S0,
     //% block="S1"
@@ -846,96 +833,33 @@ namespace PTKidsBITIoT {
 
     //% group="Servo Control"
     /**
-     * Control Servo Motor to Release Mode
-     */
-    //% block="Servo Stop %Servo_Write"
-    export function servoStop(servo: Servo_Write): void {
-        if (servo == Servo_Write.P8) {
-            pins.analogWritePin(AnalogPin.P8, 1)
-        }
-        else if (servo == Servo_Write.P12) {
-            pins.analogWritePin(AnalogPin.P12, 1)
-        }
-    }
-
-    //% group="Servo Control"
-    /**
-     * Control Servo Motor 0 - 180 Degrees and Lock or Release Mode
-     */
-    //% block="Servo %Servo_Write|Degree %Degree|Mode %Servo_Mode"
-    //% degree.min=0 degree.max=180
-    export function servoWrite(servo: Servo_Write, degree: number, mode: Servo_Mode): void {
-        if (servo == Servo_Write.P8) {
-            if (mode == Servo_Mode.Lock) {
-                pins.servoWritePin(AnalogPin.P8, degree)
-            }
-            else if (mode == Servo_Mode.Release) {
-                pins.servoWritePin(AnalogPin.P8, degree)
-                if (Math.abs(degree - last_degree_P8) * 5 < 100) {
-                    basic.pause(100)
-                }
-                else {
-                    basic.pause(Math.abs(degree - last_degree_P8) * 5)
-                }
-                pins.analogWritePin(AnalogPin.P8, 1)
-            }
-            last_degree_P8 = degree
-        }
-        else if (servo == Servo_Write.P12) {
-            if (mode == Servo_Mode.Lock) {
-                pins.servoWritePin(AnalogPin.P12, degree)
-            }
-            else if (mode == Servo_Mode.Release) {
-                pins.servoWritePin(AnalogPin.P12, degree)
-                if (Math.abs(degree - last_degree_P12) * 5 < 100) {
-                    basic.pause(100)
-                }
-                else {
-                    basic.pause(Math.abs(degree - last_degree_P12) * 5)
-                }
-                pins.analogWritePin(AnalogPin.P12, 1)
-            }
-            last_degree_P12 = degree
-        }
-    }
-
-    //% group="Servo Control"
-    /**
      * Control Servo Motor 0 - 180 Degrees
      */
     //% block="Servo %Servo_Write|Degree %Degree"
     //% degree.min=0 degree.max=180
-    export function servoWrite2(servo: Servo_Write2, degree: number): void {
-        if (servo == Servo_Write2.P8) {
-            pins.servoWritePin(AnalogPin.P8, degree)
-            last_degree_P8 = degree
-        }
-        else if (servo == Servo_Write2.P12) {
-            pins.servoWritePin(AnalogPin.P12, degree)
-            last_degree_P12 = degree
-        }
-        else if (servo == Servo_Write2.S0) {
+    export function servoWrite(servo: Servo_Write, degree: number): void {
+        if (servo == Servo_Write.S0) {
             setServoPCA(0, degree)
         }
-        else if (servo == Servo_Write2.S1) {
+        else if (servo == Servo_Write.S1) {
             setServoPCA(1, degree)
         }
-        else if (servo == Servo_Write2.S2) {
+        else if (servo == Servo_Write.S2) {
             setServoPCA(2, degree)
         }
-        else if (servo == Servo_Write2.S3) {
+        else if (servo == Servo_Write.S3) {
             setServoPCA(3, degree)
         }
-        else if (servo == Servo_Write2.S4) {
+        else if (servo == Servo_Write.S4) {
             setServoPCA(4, degree)
         }
-        else if (servo == Servo_Write2.S5) {
+        else if (servo == Servo_Write.S5) {
             setServoPCA(5, degree)
         }
-        else if (servo == Servo_Write2.S6) {
+        else if (servo == Servo_Write.S6) {
             setServoPCA(6, degree)
         }
-        else if (servo == Servo_Write2.S7) {
+        else if (servo == Servo_Write.S7) {
             setServoPCA(7, degree)
         }
     }
