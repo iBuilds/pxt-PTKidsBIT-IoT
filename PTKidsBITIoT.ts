@@ -1767,6 +1767,29 @@ namespace PTKidsBITIoT {
 
     //% group="Tools"
     /**
+     * Check Firmware Version
+     */
+    //% block="versionFirmware"
+    export function versionFirmware() {
+        let inputString = ""
+        serial.redirect(
+            SerialPin.P8,
+            SerialPin.P12,
+            BaudRate.BaudRate115200
+        )
+        serial.setWriteLinePadding(0)
+        serial.setTxBufferSize(200)
+        serial.setRxBufferSize(200)
+        serial.writeLine("CHECK_FIRMWARE")
+        while (inputString.length == 0) {
+            inputString = serial.readLine()
+        }
+        serial.redirectToUSB()
+        return "v" + inputString
+    }
+
+    //% group="Tools"
+    /**
      * Update Firmware
      */
     //% block="updateFirmware"
