@@ -90,11 +90,7 @@ enum Button_Pin {
     //% block="P1"
     P1,
     //% block="P2"
-    P2,
-    //% block="P8"
-    P8,
-    //% block="P12"
-    P12
+    P2
 }
 
 enum ADC_Read {
@@ -114,6 +110,22 @@ enum ADC_Read {
     ADC6 = 0xB4,
     //% block="7"
     ADC7 = 0xF4
+}
+
+enum DHT11_Read{
+    //% block="Temperature(℃)"
+    Temperature_C,
+    //% block="Temperature(℉)"
+    Temperature_F,
+    //% block="Humidity(0~100)"
+    Humidity
+}
+
+enum DHT11_Pin {
+    //% block="P1"
+    P1,
+    //% block="P2"
+    P2
 }
 
 enum Forward_Direction {
@@ -866,6 +878,77 @@ namespace PTKidsBITIoT {
 
     //% group="Sensor and ADC"
     /**
+     * Read DHT11 Value
+     */
+    //% block="DHT11Read $dht_type|Pin %pin"
+    export function DHT11Read(dht_type: DHT11_Read, pin: DHT11_Pin): number {
+        let _temperature: number = -999.0
+        let _humidity: number = -999.0
+        let checksum: number = 0
+        let checksumTmp: number = 0
+        let dataArray: boolean[] = []
+        let resultArray: number[] = []
+        for (let index = 0; index < 40; index++) dataArray.push(false)
+        for (let index = 0; index < 5; index++) resultArray.push(0)
+
+        if (pin = DHT11_Pin.P1) {
+            pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
+            pins.digitalWritePin(DigitalPin.P1, 0)
+            basic.pause(18)
+            pins.digitalReadPin(DigitalPin.P1)
+            control.waitMicros(40)
+            while (pins.digitalReadPin(DigitalPin.P1) == 0);
+            while (pins.digitalReadPin(DigitalPin.P1) == 1);
+
+            for (let index = 0; index < 40; index++) {
+                while (pins.digitalReadPin(DigitalPin.P1) == 1);
+                while (pins.digitalReadPin(DigitalPin.P1) == 0);
+                control.waitMicros(28)
+                if (pins.digitalReadPin(DigitalPin.P1) == 1) dataArray[index] = true
+            }
+        }
+        else if (pin = DHT11_Pin.P2) {
+            pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
+            pins.digitalWritePin(DigitalPin.P2, 0)
+            basic.pause(18)
+            pins.digitalReadPin(DigitalPin.P2)
+            control.waitMicros(40)
+            while (pins.digitalReadPin(DigitalPin.P2) == 0);
+            while (pins.digitalReadPin(DigitalPin.P2) == 1);
+
+            for (let index = 0; index < 40; index++) {
+                while (pins.digitalReadPin(DigitalPin.P2) == 1);
+                while (pins.digitalReadPin(DigitalPin.P2) == 0);
+                control.waitMicros(28)
+                if (pins.digitalReadPin(DigitalPin.P2) == 1) dataArray[index] = true
+            }
+        }
+
+        for (let index = 0; index < 5; index++)
+            for (let index2 = 0; index2 < 8; index2++)
+                if (dataArray[8 * index + index2]) resultArray[index] += 2 ** (7 - index2)
+
+        checksumTmp = resultArray[0] + resultArray[1] + resultArray[2] + resultArray[3]
+        checksum = resultArray[4]
+        if (checksumTmp >= 512) checksumTmp -= 512
+        if (checksumTmp >= 256) checksumTmp -= 256
+        switch (dht_type) {
+            case DHT11_Read.Temperature_C:
+                _temperature = resultArray[2] + resultArray[3] / 100
+                return _temperature
+            case DHT11_Read.Temperature_F:
+                _temperature = resultArray[2] + resultArray[3] / 100
+                _temperature = _temperature * 1.8 + 32
+                return _temperature
+            case DHT11_Read.Humidity:
+                _humidity = resultArray[0] + resultArray[1] / 100
+                return _humidity
+        }
+        return 0
+    }
+
+    //% group="Sensor and ADC"
+    /**
      * Read Analog from ADC Channel
      */
     //% block="ADCRead %ADC_Read"
@@ -888,12 +971,6 @@ namespace PTKidsBITIoT {
             else if (button_pin == Button_Pin.P2) {
                 while (pins.digitalReadPin(DigitalPin.P2) == 0);
             }
-            else if (button_pin == Button_Pin.P8) {
-                while (pins.digitalReadPin(DigitalPin.P8) == 0);
-            }
-            else if (button_pin == Button_Pin.P12) {
-                while (pins.digitalReadPin(DigitalPin.P12) == 0);
-            }
         }
         else {
             if (button_pin == Button_Pin.P1) {
@@ -901,12 +978,6 @@ namespace PTKidsBITIoT {
             }
             else if (button_pin == Button_Pin.P2) {
                 while (pins.digitalReadPin(DigitalPin.P2) == 1);
-            }
-            else if (button_pin == Button_Pin.P8) {
-                while (pins.digitalReadPin(DigitalPin.P8) == 1);
-            }
-            else if (button_pin == Button_Pin.P12) {
-                while (pins.digitalReadPin(DigitalPin.P12) == 1);
             }
         }
     }
