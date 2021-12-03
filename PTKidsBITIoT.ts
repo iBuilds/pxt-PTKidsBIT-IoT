@@ -882,6 +882,7 @@ namespace PTKidsBITIoT {
      */
     //% block="DHT11Read $dht_type|Pin %pin"
     export function DHT11Read(dht_type: DHT11_Read, pin: DHT11_Pin): number {
+        basic.pause(10)
         let _temperature: number = -999.0
         let _humidity: number = -999.0
         let checksum: number = 0
