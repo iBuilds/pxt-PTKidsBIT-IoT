@@ -9,7 +9,6 @@ let Sensor_PIN: number[] = []
 let Sensor_Left: number[] = []
 let Sensor_Right: number[] = []
 let Num_Sensor = 0
-let LED_PIN = 0
 
 let PCA = 0x40
 let initI2C = false
@@ -142,19 +141,6 @@ enum Find_Line {
     Center,
     //% block="Right"
     Right
-}
-
-enum LED_Pin {
-    //% block="Disable"
-    Disable,
-    //% block="P1"
-    P1,
-    //% block="P2"
-    P2,
-    //% block="P8"
-    P8,
-    //% block="P12"
-    P12
 }
 
 enum Turn_Line {
@@ -1030,6 +1016,8 @@ namespace PTKidsBITIoT {
      * Connect WiFi
      */
     //% block="connectWiFi %SSID|Password %Password"
+    //% ssid.defl="ssid"
+    //% password.defl="password"
     export function connectWiFi(ssid: string, password: string): void {
         serial.redirect(
             SerialPin.P8,
@@ -1166,6 +1154,27 @@ namespace PTKidsBITIoT {
         serial.redirectToUSB()
     }
 
+    //% group="IFTTT"
+    /**
+     * Send data to IFTTT Webhooks
+     */
+    //% block="IFTTTWebhooks %key|Event %event|Value %value"
+    //% blockExternalInputs=1
+    //% key.defl="key"
+    //% event.defl="demo"
+    export function IFTTTWebhooks(key: string, event: string, value: any[]): void {
+        let url = "https://maker.ifttt.com/trigger/" + event + "/with/key/" + key +"?"
+        for (let i = 1; i < value.length + 1; i ++) {
+            if (i < 2) {
+                url = url + "value" + i + "=" + value[i - 1]
+            }
+            else {
+                url = url + "&value" + i + "=" + value[i - 1]
+            }
+        }
+        HTTPGet(url, 443)
+    }
+
     //% group="HTTP Method"
     /**
      * HTTP get method
@@ -1221,7 +1230,7 @@ namespace PTKidsBITIoT {
         return text_output
     }
 
-    //% group="Line Follower"
+    //% group="Line Follower Robot"
     /**
      * Turn Left or Right Follower Line Mode
      */
@@ -1296,7 +1305,7 @@ namespace PTKidsBITIoT {
         }
     }
 
-    //% group="Line Follower"
+    //% group="Line Follower Robot"
     /**
      * Line Follower Forward Timer
      */
@@ -1341,7 +1350,7 @@ namespace PTKidsBITIoT {
         motorStop()
     }
 
-    //% group="Line Follower"
+    //% group="Line Follower Robot"
     /**
      * Line Follower Forward
      */
@@ -1580,7 +1589,7 @@ namespace PTKidsBITIoT {
         }
     }
 
-    //% group="Line Follower"
+    //% group="Line Follower Robot"
     /**
      * Basic Line Follower
      */
@@ -1614,7 +1623,7 @@ namespace PTKidsBITIoT {
         motorGo(left_motor_speed, right_motor_speed)
     }
 
-    //% group="Line Follower"
+    //% group="Line Follower Robot"
     /**
      * Get Position Line
      */
@@ -1672,17 +1681,17 @@ namespace PTKidsBITIoT {
         return Math.round(((Num_Sensor - 1) * 1000) - Last_Position)
     }
 
-    //% group="Line Follower"
+    //% group="Line Follower Robot"
     /**
      * Set Line Sensor Pin
      */
-    //% block="LINESensorSET $adc_pin|Sensor Left\n\n $sensor_left|Sensor Right\n $sensor_right|ON OFF Sensor $led_pin"
-    export function LINESensorSET(adc_pin: number[], sensor_left: number[], sensor_right: number[], led_pin: LED_Pin): void {
+    //% block="LINESensorSET $adc_pin|Sensor Left\n\n $sensor_left|Sensor Right\n $sensor_right"
+    //% blockExternalInputs=1
+    export function LINESensorSET(adc_pin: number[], sensor_left: number[], sensor_right: number[]): void {
         Sensor_PIN = adc_pin
         Sensor_Left = sensor_left
         Sensor_Right = sensor_right
         Num_Sensor = Sensor_PIN.length
-        LED_PIN = led_pin
 
         for (let i = 0; i < Num_Sensor; i++) {
             Color_Line[i] = Line_HIGH[Sensor_PIN[i]]
@@ -1698,7 +1707,7 @@ namespace PTKidsBITIoT {
         }
     }
 
-    //% group="Line Follower"
+    //% group="Line Follower Robot"
     /**
      * Calibrate Sensor
      */
