@@ -30,6 +30,8 @@ let previous_error = 0
 let PD_Value = 0
 let left_motor_speed = 0
 let right_motor_speed = 0
+let distance = 0
+let timer = 0
 
 enum Motor_Write {
     //% block="1"
@@ -109,6 +111,13 @@ enum ADC_Read {
     ADC6 = 0xB4,
     //% block="7"
     ADC7 = 0xF4
+}
+
+enum Ultrasonic_PIN {
+    //% block="P1"
+    P1,
+    //% block="P2"
+    P2
 }
 
 enum DHT11_Read{
@@ -932,6 +941,67 @@ namespace PTKidsBITIoT {
                 return _humidity
         }
         return 0
+    }
+
+    //% group="Sensor and ADC"
+    /**
+     * Read Distance from Ultrasonic Sensor
+     */
+    //% block="GETDistance Triger %Trigger_PIN|Echo %Echo_PIN"
+    //% Echo_PIN.defl=Ultrasonic_PIN.P2
+    export function distanceRead(Trigger_PIN: Ultrasonic_PIN, Echo_PIN: Ultrasonic_PIN): number {
+        let duration
+        let maxCmDistance = 500
+
+        if (control.millis() - timer > 1000) {
+            if (Trigger_PIN == Ultrasonic_PIN.P1 && Echo_PIN == Ultrasonic_PIN.P2) {
+                pins.setPull(DigitalPin.P1, PinPullMode.PullNone)
+                pins.digitalWritePin(DigitalPin.P1, 0)
+                control.waitMicros(2)
+                pins.digitalWritePin(DigitalPin.P1, 1)
+                control.waitMicros(10)
+                pins.digitalWritePin(DigitalPin.P1, 0)
+                duration = pins.pulseIn(DigitalPin.P2, PulseValue.High, maxCmDistance * 58)
+                distance = Math.idiv(duration, 58)
+            }
+            else if (Trigger_PIN == Ultrasonic_PIN.P2 && Echo_PIN == Ultrasonic_PIN.P1) {
+                pins.setPull(DigitalPin.P2, PinPullMode.PullNone)
+                pins.digitalWritePin(DigitalPin.P2, 0)
+                control.waitMicros(2)
+                pins.digitalWritePin(DigitalPin.P2, 1)
+                control.waitMicros(10)
+                pins.digitalWritePin(DigitalPin.P2, 0)
+                duration = pins.pulseIn(DigitalPin.P1, PulseValue.High, maxCmDistance * 58)
+                distance = Math.idiv(duration, 58)
+            }
+        }
+
+        if (Trigger_PIN == Ultrasonic_PIN.P1 && Echo_PIN == Ultrasonic_PIN.P2) {
+            pins.setPull(DigitalPin.P1, PinPullMode.PullNone)
+            pins.digitalWritePin(DigitalPin.P1, 0)
+            control.waitMicros(2)
+            pins.digitalWritePin(DigitalPin.P1, 1)
+            control.waitMicros(10)
+            pins.digitalWritePin(DigitalPin.P1, 0)
+            duration = pins.pulseIn(DigitalPin.P2, PulseValue.High, maxCmDistance * 58)
+        }
+        else if (Trigger_PIN == Ultrasonic_PIN.P2 && Echo_PIN == Ultrasonic_PIN.P1) {
+            pins.setPull(DigitalPin.P2, PinPullMode.PullNone)
+            pins.digitalWritePin(DigitalPin.P2, 0)
+            control.waitMicros(2)
+            pins.digitalWritePin(DigitalPin.P2, 1)
+            control.waitMicros(10)
+            pins.digitalWritePin(DigitalPin.P2, 0)
+            duration = pins.pulseIn(DigitalPin.P1, PulseValue.High, maxCmDistance * 58)
+        }
+
+        let d = Math.idiv(duration, 58)
+
+        if (d != 0) {
+            distance = (0.1 * d) + (1 - 0.1) * distance
+        }
+        timer = control.millis()
+        return Math.round(distance)
     }
 
     //% group="Sensor and ADC"
